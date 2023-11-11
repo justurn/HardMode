@@ -940,11 +940,11 @@ bool HardModeHandler::CanTaintPlayer(ObjectGuid guid)
 
 bool HardModeHandler::PlayerHasLives(ObjectGuid guid)
 {
-    QueryResult qresult = CharacterDatabase.Query("SELECT lives FROM hardmode_player_settings WHERE guid = {}", guid);
+    QueryResult qResult = CharacterDatabase.Query("SELECT lives FROM hardmode_player_settings WHERE guid = {}", guid);
 
-    if (qresult)
+    if (qResult)
     {
-        Field* fields = qresult->Fetch();
+        Field* fields = qResult->Fetch();
         if (fields[0].Get<uint32>() >= 0)
         {
             return true;
@@ -954,7 +954,7 @@ bool HardModeHandler::PlayerHasLives(ObjectGuid guid)
             return false;
         }
     }
-    
+
     return false; // Default value if the record is not found
 }
 
