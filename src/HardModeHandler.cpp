@@ -940,7 +940,7 @@ bool HardModeHandler::CanTaintPlayer(ObjectGuid guid)
 
 uint32 HardModeHandler::GetPlayerLives(ObjectGuid guid)
 {
-    QueryResult result = CharacterDatabase.Query("SELECT lives FROM hardmode_player_settings WHERE guid = %u", charGuid);
+    QueryResult result = CharacterDatabase.Query("SELECT lives FROM hardmode_player_settings WHERE guid = %u", guid);
     if (result)
     {
         Field* field = result->Fetch();
@@ -952,12 +952,12 @@ uint32 HardModeHandler::GetPlayerLives(ObjectGuid guid)
 void HardModeHandler::IncrementPlayerLives(ObjectGuid guid)
 {
     // Increment lives for the character
-    CharacterDatabase.Execute("INSERT INTO hardmode_player_settings (guid, lives) VALUES (%u, 1) ON DUPLICATE KEY UPDATE lives = lives + 1", charGuid);
+    CharacterDatabase.Execute("INSERT INTO hardmode_player_settings (guid, lives) VALUES (%u, 1) ON DUPLICATE KEY UPDATE lives = lives + 1", guid);
 }
 
 void HardModeHandler::DecrementPlayerLives(ObjectGuid guid)
 {
-    CharacterDatabase.Execute("UPDATE hardmode_player_settings SET lives = GREATEST(0, lives - 1) WHERE guid = %u", charGuid);
+    CharacterDatabase.Execute("UPDATE hardmode_player_settings SET lives = GREATEST(0, lives - 1) WHERE guid = %u", guid);
 }
 
 bool HardModeHandler::IsPlayerShadowBanned(ObjectGuid guid)
