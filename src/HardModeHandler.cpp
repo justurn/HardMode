@@ -940,7 +940,7 @@ bool HardModeHandler::CanTaintPlayer(ObjectGuid guid)
 
 bool HardModeHandler::PlayerHasLives(ObjectGuid guid)
 {
-    QueryResult qResult = CharacterDatabase.Query("SELECT lives FROM hardmode_player_settings WHERE guid = {}", guid);
+    QueryResult qResult = CharacterDatabase.Query("SELECT lives FROM hardmode_player_settings WHERE guid = {}", guid.GetRawValue());
 
     if (qResult)
     {
@@ -960,12 +960,12 @@ bool HardModeHandler::PlayerHasLives(ObjectGuid guid)
 
 void HardModeHandler::IncrementPlayerLives(ObjectGuid guid)
 {
-    CharacterDatabase.Execute("UPDATE hardmode_player_settings SET lives = (lives + 1) WHERE guid = {}", guid);
+    CharacterDatabase.Execute("UPDATE hardmode_player_settings SET lives = (lives + 1) WHERE guid = {}", guid.GetRawValue());
 }
 
 void HardModeHandler::DecrementPlayerLives(ObjectGuid guid)
 {
-    CharacterDatabase.Execute("UPDATE hardmode_player_settings SET lives = (lives - 1) WHERE guid = {}", guid);
+    CharacterDatabase.Execute("UPDATE hardmode_player_settings SET lives = (lives - 1) WHERE guid = {}", guid.GetRawValue());
 }
 
 bool HardModeHandler::IsPlayerShadowBanned(ObjectGuid guid)
