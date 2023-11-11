@@ -944,7 +944,7 @@ uint32 HardModeHandler::GetPlayerLives(uint32 charGuid)
     if (result)
     {
         Field* field = result->Fetch();
-        return field[0].GetUInt32();
+        return field[0].Get<uint32>();
     }
     return 0; // Default value if the record is not found
 }
