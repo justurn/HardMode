@@ -71,6 +71,10 @@ public:
     void UpdatePlayerTainted(ObjectGuid guid, bool state);
     bool CanTaintPlayer(ObjectGuid guid);
 
+    uint8 GetPlayerLives(uint32 charGuid);
+    void IncrementPlayerLives(uint32 charGuid);
+    void DecrementPlayerLives(uint32 charGuid);
+    
     bool IsPlayerShadowBanned(ObjectGuid guid);
     void UpdatePlayerShadowBanned(ObjectGuid guid, bool state);
     void TryShadowBanPlayer(ObjectGuid guid);
