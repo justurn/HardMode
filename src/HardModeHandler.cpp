@@ -938,7 +938,7 @@ bool HardModeHandler::CanTaintPlayer(ObjectGuid guid)
     return true;
 }
 
-uint32 HardModeHandler::GetPlayerLives(uint32 charGuid)
+uint32 HardModeHandler::GetPlayerLives(ObjectGuid guid)
 {
     QueryResult result = CharacterDatabase.Query("SELECT lives FROM hardmode_player_settings WHERE guid = %u", charGuid);
     if (result)
@@ -949,13 +949,13 @@ uint32 HardModeHandler::GetPlayerLives(uint32 charGuid)
     return 0; // Default value if the record is not found
 }
 
-void HardModeHandler::IncrementPlayerLives(uint32 charGuid)
+void HardModeHandler::IncrementPlayerLives(ObjectGuid guid)
 {
     // Increment lives for the character
     CharacterDatabase.Execute("INSERT INTO hardmode_player_settings (guid, lives) VALUES (%u, 1) ON DUPLICATE KEY UPDATE lives = lives + 1", charGuid);
 }
 
-void HardModeHandler::DecrementPlayerLives(uint32 charGuid)
+void HardModeHandler::DecrementPlayerLives(ObjectGuid guid)
 {
     CharacterDatabase.Execute("UPDATE hardmode_player_settings SET lives = GREATEST(0, lives - 1) WHERE guid = %u", charGuid);
 }
