@@ -194,7 +194,7 @@ void HardModeHooksPlayerScript::OnPlayerResurrect(Player* player, float /*restor
         sHardModeHandler->DecrementPlayerLives(player->GetGUID());
 
         // Check if lives are less than 0, then apply shadowban
-        if (sHardModeHandler->PlayerHasLives(player->GetGUID()))
+        if (!sHardModeHandler->PlayerHasLives(player->GetGUID()))
         {
             sHardModeHandler->TryShadowBanPlayer(player->GetGUID());
         }
@@ -221,7 +221,7 @@ void HardModeHooksPlayerScript::OnPlayerReleasedGhost(Player* player)
         sHardModeHandler->DecrementPlayerLives(player->GetGUID());
 
         // Check if lives are less than 0, then apply shadowban
-        if (sHardModeHandler->PlayerHasLives(player->GetGUID()))
+        if (!sHardModeHandler->PlayerHasLives(player->GetGUID()))
         {
             sHardModeHandler->TryShadowBanPlayer(player->GetGUID());
         }
