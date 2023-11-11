@@ -188,9 +188,19 @@ void HardModeHooksPlayerScript::OnPlayerResurrect(Player* player, float /*restor
         return;
     }
 
-    if (sHardModeHandler->PlayerHasRestriction(player->GetGUID(), HARDMODE_RESTRICT_PERMADEATH))
+    uint32 charGuid = player->GetGUIDLow();
+
+    if (sHardModeHandler->PlayerHasRestriction(charGuid, HARDMODE_RESTRICT_PERMADEATH))
     {
-        sHardModeHandler->TryShadowBanPlayer(player->GetGUID());
+        // Deduct a life
+        PlayerSettings::DecrementLives(charGuid);
+
+        // Check if lives are less than 0, then apply shadowban
+        uint8 lives = PlayerSettings::GetLives(charGuid);
+        if (lives <= 0)
+        {
+            sHardModeHandler->TryShadowBanPlayer(charGuid);
+        }
     }
 
     sHardModeHandler->ValidatePlayerAuras(player);
