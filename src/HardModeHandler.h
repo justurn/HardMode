@@ -71,7 +71,7 @@ public:
     void UpdatePlayerTainted(ObjectGuid guid, bool state);
     bool CanTaintPlayer(ObjectGuid guid);
 
-    uint32 GetPlayerLives(ObjectGuid guid);
+    bool PlayerHasLives(ObjectGuid guid);
     void IncrementPlayerLives(ObjectGuid guid);
     void DecrementPlayerLives(ObjectGuid guid);
     

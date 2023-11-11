@@ -938,15 +938,22 @@ bool HardModeHandler::CanTaintPlayer(ObjectGuid guid)
     return true;
 }
 
-uint32 HardModeHandler::GetPlayerLives(ObjectGuid guid)
+bool HardModeHandler::PlayerHasLives(ObjectGuid guid)
 {
     QueryResult qresult = CharacterDatabase.Query("SELECT lives FROM hardmode_player_settings WHERE guid = '{}'", guid);
     if (qresult)
     {
-        Field* fields = qResult->Fetch();
-        return fields[0].Get<uint32>();
+        Field* fields = qresult->Fetch();
+        if (fields[0].Get<uint32>() >= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
-    return 0; // Default value if the record is not found
+    return false; // Default value if the record is not found
 }
 
 void HardModeHandler::IncrementPlayerLives(ObjectGuid guid)
