@@ -952,12 +952,12 @@ uint32 HardModeHandler::GetPlayerLives(ObjectGuid guid)
 void HardModeHandler::IncrementPlayerLives(ObjectGuid guid)
 {
     // Increment lives for the character
-    CharacterDatabase.Execute("INSERT INTO hardmode_player_settings (guid, lives) VALUES (%u, 1) ON DUPLICATE KEY UPDATE lives = lives + 1", guid);
+    CharacterDatabase.Execute("UPDATE hardmode_player_settings SET lives = (lives + 1) WHERE guid = %u", guid);
 }
 
 void HardModeHandler::DecrementPlayerLives(ObjectGuid guid)
 {
-    CharacterDatabase.Execute("UPDATE hardmode_player_settings SET lives = GREATEST(0, lives - 1) WHERE guid = %u", guid);
+    CharacterDatabase.Execute("UPDATE hardmode_player_settings SET lives = (lives - 1) WHERE guid = %u", guid);
 }
 
 bool HardModeHandler::IsPlayerShadowBanned(ObjectGuid guid)
