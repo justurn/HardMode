@@ -203,33 +203,6 @@ void HardModeHooksPlayerScript::OnPlayerResurrect(Player* player, float /*restor
     sHardModeHandler->ValidatePlayerAuras(player);
 }
 
-void HardModeHooksPlayerScript::OnPlayerReleasedGhost(Player* player)
-{
-    if (!sHardModeHandler->IsHardModeEnabled())
-    {
-        return;
-    }
-
-    if (!player)
-    {
-        return;
-    }
-
-    if (sHardModeHandler->PlayerHasRestriction(player->GetGUID(), HARDMODE_RESTRICT_PERMADEATH))
-    {
-        // Deduct a life
-        sHardModeHandler->DecrementPlayerLives(player->GetGUID());
-
-        // Check if lives are less than 0, then apply shadowban
-        if (!sHardModeHandler->PlayerHasLives(player->GetGUID()))
-        {
-            sHardModeHandler->TryShadowBanPlayer(player->GetGUID());
-        }
-    }
-
-    sHardModeHandler->ValidatePlayerAuras(player);
-}
-
 bool HardModeHooksPlayerScript::CanRepopAtGraveyard(Player* player)
 {
     if (!sHardModeHandler->IsHardModeEnabled())
