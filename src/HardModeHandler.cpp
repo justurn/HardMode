@@ -940,11 +940,11 @@ bool HardModeHandler::CanTaintPlayer(ObjectGuid guid)
 
 uint32 HardModeHandler::GetPlayerLives(ObjectGuid guid)
 {
-    QueryResult result = CharacterDatabase.Query("SELECT lives FROM hardmode_player_settings WHERE guid = '{}'", guid);
-    if (result)
+    QueryResult qresult = CharacterDatabase.Query("SELECT lives FROM hardmode_player_settings WHERE guid = '{}'", guid);
+    if (qresult)
     {
-        Field* field = result->Fetch();
-        return field[0].Get<uint32>();
+        Field* fields = qResult->Fetch();
+        return fields[0].Get<uint32>();
     }
     return 0; // Default value if the record is not found
 }
