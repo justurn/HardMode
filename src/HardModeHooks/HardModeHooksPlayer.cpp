@@ -203,26 +203,6 @@ void HardModeHooksPlayerScript::OnPlayerResurrect(Player* player, float /*restor
     sHardModeHandler->ValidatePlayerAuras(player);
 }
 
-bool HardModeHooksPlayerScript::CanRepopAtGraveyard(Player* player)
-{
-    if (!sHardModeHandler->IsHardModeEnabled())
-    {
-        return true;
-    }
-
-    if (!player)
-    {
-        return true;
-    }
-
-    if (sHardModeHandler->PlayerHasRestriction(player->GetGUID(), HARDMODE_RESTRICT_PERMADEATH))
-    {
-        return false;
-    }
-
-    return true;
-}
-
 bool HardModeHooksPlayerScript::OnBeforeTeleport(Player* player, uint32 mapId, float /*x*/, float /*y*/, float /*z*/, float /*orientation*/, uint32 /*options*/, Unit* /*target*/)
 {
     if (!sHardModeHandler->IsHardModeEnabled())
