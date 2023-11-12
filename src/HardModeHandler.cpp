@@ -945,7 +945,7 @@ bool HardModeHandler::PlayerHasLives(ObjectGuid guid)
     if (qResult)
     {
         Field* fields = qResult->Fetch();
-        if (fields[0].Get<uint32>() >= 0)
+        if (fields[0].Get<uint32>() > 0)
         {
             return true;
         }
