@@ -18,7 +18,6 @@ private:
     void OnCreateItem(Player* player, Item* item, uint32 count) override;
 
     void OnPlayerResurrect(Player* player, float restorePercent, bool applySickness) override;
-    void OnPlayerReleasedGhost(Player* player) override;
     bool CanRepopAtGraveyard(Player* player) override;
 
     bool OnBeforeTeleport(Player* player, uint32 mapId, float x, float y, float z, float orientation, uint32 options, Unit* target) override;
